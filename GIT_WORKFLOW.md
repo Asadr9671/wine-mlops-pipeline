@@ -4,14 +4,17 @@ Replace `<USER>` with your GitHub username. **Do everything below yourself so th
 (the integrity rule penalises copied histories). Commit in small steps with your own messages.
 
 ## 1. Setup (main stays clean)
+
 ```bash
 git init -b main
 git add .gitignore README.md Makefile requirements.txt data/.gitkeep
 git commit -m "chore: add Makefile, requirements and gitignore"
-git remote add origin https://github.com/<USER>/wine-mlops-pipeline.git
+git remote add origin https://github.com/Asadr9671/wine-mlops-pipeline.git
 git push -u origin main
 ```
+
 Then push the rest through feature branches and Pull Requests (each PR triggers CI):
+
 ```bash
 git checkout -b feature/data-pipeline
 git add src/__init__.py src/data.py tests/__init__.py tests/test_data.py
@@ -30,9 +33,11 @@ git add .github tests/test_model_gate.py
 git commit -m "ci: GitHub Actions workflow and model quality gate"
 git push -u origin feature/ci-quality-gate      # PR -> merge
 ```
+
 Note: CI runs `make test`, which trains the pipeline inside the gate test, so the gate PR needs `src/` merged first.
 
 ## 2. Engineered merge conflict (CV_FOLDS line in src/train.py)
+
 ```bash
 git checkout main && git pull
 git checkout -b conflict-simulation
@@ -46,7 +51,9 @@ git commit -am "config: use 3 CV folds"
 git merge conflict-simulation      # -> CONFLICT (content): Merge conflict in src/train.py
 git status
 ```
+
 Open `src/train.py`, delete the markers, keep the correct line:
+
 ```
 <<<<<<< HEAD
 CV_FOLDS = 3
@@ -54,16 +61,20 @@ CV_FOLDS = 3
 CV_FOLDS = 10
 >>>>>>> conflict-simulation
 ```
+
 becomes `CV_FOLDS = 5` (the assignment requires 5-fold CV). Then:
+
 ```bash
 git add src/train.py
 git commit -m "Merge conflict-simulation into main: resolve CV_FOLDS conflict (keep 5)"
 git push origin main
 git log --oneline --graph --all      # screenshot for the report
 ```
+
 Copy the terminal output of the whole sequence (merge attempt, `git status`, resolution, log) into the report.
 
 ## 3. Report (MLOps_A01_RollNumber.pdf) checklist
+
 - [ ] Table 1: hyperparameter results (from `reports/table1_hyperparameter_results.csv` after `make train`)
 - [ ] MLflow UI: experiment overview, a comparison plot (select runs -> Compare), Models tab showing `WineClassifier` with alias `champion`
 - [ ] Green GitHub Actions run screenshot
