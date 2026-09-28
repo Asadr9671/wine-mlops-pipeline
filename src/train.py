@@ -116,9 +116,9 @@ def run_training(tracking_uri=DEFAULT_TRACKING_URI, experiment_name=EXPERIMENT_N
                 model = build_model(family, params).fit(X_train, y_train)
                 signature = infer_signature(X_train, model.predict(X_train))
                 mlflow.sklearn.log_model(
-                    model, name="model", signature=signature,
+                    model, artifact_path="model", signature=signature,
                     input_example=input_example,
-                    skops_trusted_types=SKOPS_TRUSTED,
+                    serialization_format=mlflow.sklearn.SERIALIZATION_FORMAT_CLOUDPICKLE,
                 )
                 results.append({"run_id": run.info.run_id, "run_name": run_name,
                                 "family": family, **params, **metrics})
