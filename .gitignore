@@ -1,0 +1,28 @@
+# MLflow artifacts / tracking stores
+mlruns/
+mlartifacts/
+mlflow.db
+*.db
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Transient model artifacts and reports
+*.pkl
+*.joblib
+*.onnx
+reports/
+
+# Data (keep folder only)
+data/*
+!data/.gitkeep
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
