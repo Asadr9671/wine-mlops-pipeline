@@ -33,7 +33,7 @@ SKOPS_TRUSTED = [
     "numpy.ndarray",
     "numpy.dtype",
 ]
-CV_FOLDS = 5
+CV_FOLDS = 10
 
 # Model Family A: RandomForestClassifier, Model Family B: GradientBoostingClassifier
 SEARCH_GRID = {
