@@ -1,6 +1,6 @@
 # Wine MLOps Pipeline
 
-![CI](https://github.com/Asadr9671/wine-mlops-pipeline/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/Asadr9671/wine-mlops-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/Asadr9671/wine-mlops-pipeline/actions/workflows/ci.yml)
 
 Reproducible MLOps pipeline for `sklearn.datasets.load_wine` (178 samples, 13 features, 3 classes):
 Makefile automation, MLflow tracking + Model Registry, and a GitHub Actions quality gate.
